@@ -1,0 +1,24 @@
+package com.github.tacticallaptopbag
+
+import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.main
+import com.github.ajalt.clikt.core.subcommands
+import com.github.tacticallaptopbag.convert.ConvertCommand
+import com.github.tacticallaptopbag.strmanip.remove.RemoveCommand
+import com.github.tacticallaptopbag.strmanip.remove.RemovePrefixCommand
+import com.github.tacticallaptopbag.strmanip.remove.RemoveSuffixCommand
+
+class MainCommand: CliktCommand() {
+    override fun run() = Unit
+}
+
+fun main(args: Array<String>) = MainCommand()
+    .subcommands(
+        ConvertCommand(),
+        RemoveCommand()
+            .subcommands(
+                RemovePrefixCommand(),
+                RemoveSuffixCommand(),
+            )
+    )
+    .main(args)
