@@ -19,7 +19,7 @@ abstract class BaseCommand(name: String) : CliktCommand(name = name) {
         envvar = MUSIC_MAN_DIR,
         hidden = true,
     )
-        .default("")
+        .default(".")
 
     private fun listFiles(path: String = baseDir): List<File> {
         val cwd = File(path)
