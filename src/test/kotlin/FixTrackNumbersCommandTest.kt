@@ -23,6 +23,13 @@ class FixTrackNumbersCommandTest {
         testDir.createFile(UNRELATED_FILE)
     }
 
+    private fun createFixedFiles(testDir: Path, fileCount: Int = 10, extension: String = "mp3") {
+        (1..fileCount).forEach {
+            testDir.createFile(testFileFixed(it, extension))
+        }
+        testDir.createFile(UNRELATED_FILE)
+    }
+
     @Test
     fun testFixTrackNumbers(@TempDir testDir: Path) {
         createFiles(testDir)
@@ -82,6 +89,23 @@ class FixTrackNumbersCommandTest {
         val expectedFiles = mutableListOf<String>()
         (1..9).forEach {
             expectedFiles += testFileFixed(it, padLength = 1)
+        }
+        expectedFiles += UNRELATED_FILE
+        testDir.expectFiles(expectedFiles = expectedFiles.toTypedArray())
+    }
+
+    @Test
+    fun testAlreadyFixedTrackNumbers(@TempDir testDir: Path) {
+        createFixedFiles(testDir, 20)
+
+        command.expect(
+            "",
+            testDir,
+        )
+
+        val expectedFiles = mutableListOf<String>()
+        (1..20).forEach {
+            expectedFiles += testFileFixed(it)
         }
         expectedFiles += UNRELATED_FILE
         testDir.expectFiles(expectedFiles = expectedFiles.toTypedArray())
