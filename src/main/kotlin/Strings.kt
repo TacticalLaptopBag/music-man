@@ -46,8 +46,16 @@ const val HELP_TRACKNO =
     "when alphabetically sorted. E.g. 1, 2, 3 becomes 01, 02, 03."
 
 // Format
-const val HELP_FORMAT = ""
-const val HELP_FORMAT_SOURCE = ""
-const val HELP_FORMAT_ARTIST = ""
-const val HELP_FORMAT_ALBUM = ""
+const val HELP_FORMAT = "Formats a directory of tracks from a given source to the opinionated format of '<tracknumber> <title>'"
+const val HELP_FORMAT_SOURCE =
+    "Where the tracks were downloaded from.\n" +
+    "Bandcamp format: <artist> - <album> - <tracknumber> <title> | " +
+    "Qobuz format: <int>_<tracknumber>_<artist-name>_<track-title>_<int> | " +
+    "iTunes format: TBD"
+const val HELP_FORMAT_ARTIST =
+    "Explicitly set the artist. " +
+    "This is automatically detected by looking at the name of the current directory's grandparent"
+const val HELP_FORMAT_ALBUM =
+    "Explicitly set the album. " +
+    "This is automatically detected by looking at the name of the current directory's parent"
 const val FORMAT_INCOMPLETE = "WARN: Format enforcement was incomplete for %s"
