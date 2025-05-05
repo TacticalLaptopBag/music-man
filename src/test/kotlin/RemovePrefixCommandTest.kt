@@ -1,5 +1,4 @@
 import com.github.tacticallaptopbag.HELP_RM_PREFIX
-import com.github.tacticallaptopbag.HELP_RM_SUFFIX
 import com.github.tacticallaptopbag.strmanip.remove.RemovePrefixCommand
 import org.junit.jupiter.api.io.TempDir
 import java.nio.file.Path

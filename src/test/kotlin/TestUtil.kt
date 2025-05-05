@@ -27,11 +27,6 @@ fun BaseCommand.expect(
     stdout: String? = null,
     stderr: String = "",
 ): CliktCommandTestResult {
-    assertFalse(
-        stdout != null && fileChangelog.isNotEmpty(),
-    "Cannot expect both a stdout and a file changelog"
-    )
-
     val result = this.test(
         argv = argv,
         envvars = if(testDir != null) mapOf(MUSIC_MAN_DIR to testDir.toString()) else emptyMap()
@@ -51,17 +46,16 @@ fun BaseCommand.expect(
     else
         assertFalse(this.dry)
 
-    if(stdout == null) {
+    if(fileChangelog.isNotEmpty()) {
         val dryString = if(dry) "$DRY\n" else ""
         val changelogStr = fileChangelog.joinToString("") {
             "${it.first} -> ${it.second}\n"
         }
+        val expected = stdout?.format(dryString + changelogStr)
+            ?: (dryString + changelogStr)
 
-        assertEquals(
-            dryString + changelogStr,
-            result.stdout
-        )
-    } else {
+        assertEquals(expected, result.stdout)
+    } else if(stdout != null) {
         assertEquals(stdout, result.stdout)
     }
 

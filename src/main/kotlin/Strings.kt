@@ -44,3 +44,10 @@ const val HELP_REPL_REGEX =
 const val HELP_TRACKNO =
     "Pads all tracks in the current directory with zeros so that tracks appear in order " +
     "when alphabetically sorted. E.g. 1, 2, 3 becomes 01, 02, 03."
+
+// Format
+const val HELP_FORMAT = ""
+const val HELP_FORMAT_SOURCE = ""
+const val HELP_FORMAT_ARTIST = ""
+const val HELP_FORMAT_ALBUM = ""
+const val FORMAT_INCOMPLETE = "WARN: Format enforcement was incomplete for %s"
