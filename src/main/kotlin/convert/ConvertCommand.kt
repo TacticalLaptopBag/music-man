@@ -8,6 +8,7 @@ import com.github.tacticallaptopbag.HELP_CONVERT_MP3PATH
 import com.github.tacticallaptopbag.HELP_CONVERT_SAMPLERATE
 import com.github.tacticallaptopbag.HELP_CONVERT_SOURCE
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.CliktError
 import com.github.ajalt.clikt.core.Context
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.help
@@ -72,8 +73,7 @@ class ConvertCommand : CliktCommand(name = "convert") {
         mp3Path?.let { converters += MP3Converter(it, "mp3") }
 
         if(converters.isEmpty()) {
-            echo(CONVERT_NONE_SPECIFIED, err = true)
-            exitProcess(1)
+            throw CliktError(CONVERT_NONE_SPECIFIED)
         }
 
         if(source.isDirectory()) {

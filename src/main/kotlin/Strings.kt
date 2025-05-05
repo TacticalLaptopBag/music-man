@@ -1,6 +1,7 @@
 package com.github.tacticallaptopbag
 
 // Global
+const val MUSIC_MAN_DIR = "MUSIC_MAN_DIR"
 const val HELP_DRY = "Shows the result of a command without actually performing it"
 const val HELP_FILETYPE =
     "The file extension to run this command on. " +

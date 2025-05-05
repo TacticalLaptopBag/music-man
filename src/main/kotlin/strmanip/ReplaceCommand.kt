@@ -8,7 +8,6 @@ import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.help
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.tacticallaptopbag.*
-import java.io.File
 
 class ReplaceCommand : BaseCommand("replace") {
     override fun help(context: Context): String = HELP_REPL
@@ -24,7 +23,7 @@ class ReplaceCommand : BaseCommand("replace") {
 
     private fun getNewName(fileName: String): String {
         if(regexFlag) {
-            val regex = phrase.toRegex()
+            val regex = Regex(phrase)
             return regex.replace(fileName, newPhrase)
         } else {
             return fileName.replace(phrase, newPhrase)
@@ -35,12 +34,12 @@ class ReplaceCommand : BaseCommand("replace") {
         val fileType = guessFileType()
         notifyDry()
 
-        listFilesOfType(fileType).forEach { fileName ->
-            val newName = getNewName(fileName)
-            if(fileName == newName) return@forEach
-            echo("$fileName -> $newName")
+        listFilesOfType(fileType).forEach { file ->
+            val newName = getNewName(file.name)
+            if(file.name == newName) return@forEach
+            echo("${file.name} -> $newName")
             if(!dry) {
-                File(fileName).renameTo(File(newName))
+                rename(file, newName)
             }
         }
     }

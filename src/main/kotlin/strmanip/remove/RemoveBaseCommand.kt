@@ -10,14 +10,13 @@ abstract class RemoveBaseCommand(name: String): BaseCommand(name) {
         val fileType = guessFileType()
         notifyDry()
 
-        listFilesOfType(fileType).forEach { fileName ->
-            val newName = getNewName(fileName)
+        listFilesOfType(fileType).forEach { file ->
+            val newName = getNewName(file.name)
             if(newName.isNullOrBlank()) return@forEach
 
-            echo("$fileName -> $newName")
+            echo("${file.name} -> $newName")
             if(!dry) {
-                val file = File(fileName)
-                file.renameTo(File(newName))
+                rename(file, newName)
             }
         }
     }
