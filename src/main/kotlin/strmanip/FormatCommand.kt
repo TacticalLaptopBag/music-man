@@ -12,7 +12,6 @@ class FormatCommand : BaseCommand("format") {
     val source by argument()
         .help(HELP_FORMAT_SOURCE)
         .enum<MusicSource>()
-        .default(MusicSource.Bandcamp)
     val artistOpt by option("--artist")
         .help(HELP_FORMAT_ARTIST)
     val albumOpt by option("--album")
