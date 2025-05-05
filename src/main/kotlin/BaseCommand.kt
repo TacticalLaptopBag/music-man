@@ -2,20 +2,18 @@ package com.github.tacticallaptopbag
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.CliktError
-import com.github.ajalt.clikt.parameters.options.default
-import com.github.ajalt.clikt.parameters.options.flag
-import com.github.ajalt.clikt.parameters.options.help
-import com.github.ajalt.clikt.parameters.options.option
+import com.github.ajalt.clikt.parameters.options.*
 import java.io.File
 import java.nio.file.Files
-import java.nio.file.Path
-import kotlin.io.path.extension
 
 abstract class BaseCommand(name: String) : CliktCommand(name = name) {
     val dry by option("-d", "--dry")
         .flag(default = false)
         .help(HELP_DRY)
     val fileType by option("-f", "--filetype")
+        .convert {
+            it.removePrefix(".")
+        }
         .help(HELP_FILETYPE)
     val baseDir by option(
         envvar = MUSIC_MAN_DIR,
@@ -31,7 +29,7 @@ abstract class BaseCommand(name: String) : CliktCommand(name = name) {
     }
 
     protected fun listFilesOfType(fileType: String, path: String = baseDir): List<File> {
-        return listFiles(path).filter { it.extension == fileType.removePrefix(".") }
+        return listFiles(path).filter { it.extension == fileType }
     }
 
     protected fun guessFileType(): String {
