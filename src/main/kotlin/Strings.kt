@@ -27,7 +27,6 @@ const val CONVERT_NONE_SPECIFIED = "No converters specified! Use `--help` to see
 const val CONVERT_FAIL = "Failed to convert %s"
 
 // Remove
-const val HELP_RM = ""
 const val HELP_RM_PREFIX = "Removes a given prefix from all files in the current directory"
 const val HELP_RM_SUFFIX = "Removes a given suffix from all files in the current directory"
 
@@ -41,3 +40,7 @@ const val HELP_REPL_REGEX =
     "When used, treats <phrase> as regex, rather than a substring. " +
     "All instances found by this regex will be replaced, so it's recommended to do a dry run first."
 
+// Fix Track Numbers
+const val HELP_TRACKNO =
+    "Pads all tracks in the current directory with zeros so that tracks appear in order " +
+    "when alphabetically sorted. E.g. 1, 2, 3 becomes 01, 02, 03."
