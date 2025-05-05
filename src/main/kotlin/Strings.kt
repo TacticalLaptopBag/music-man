@@ -1,8 +1,10 @@
 package com.github.tacticallaptopbag
 
 // Global
-const val HELP_DRY = ""
-const val HELP_FILETYPE = ""
+const val HELP_DRY = "Shows the result of a command without actually performing it"
+const val HELP_FILETYPE =
+    "The file extension to run this command on. " +
+    "Leaving this blank will run the command on the most common file extension in the directory."
 const val FILETYPE_FAIL = "Unable to guess file type! Please specify it with --filetype"
 const val DRY = "DRY RUN: no files will be modified"
 
