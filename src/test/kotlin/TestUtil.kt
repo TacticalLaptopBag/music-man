@@ -6,9 +6,20 @@ import com.github.tacticallaptopbag.MUSIC_MAN_DIR
 import java.nio.file.Path
 import kotlin.test.*
 
+fun BaseCommand.expectHelp(help: String) {
+    val result = this.test(argv = "--help")
+    assertEquals(0, result.statusCode)
+    assertContains(
+        result.output
+            .replace("\n", "")
+            .replace("  ", " "),
+        help
+    )
+}
+
 fun BaseCommand.expect(
     argv: String,
-    testDir: Path,
+    testDir: Path? = null,
     statusCode: Int = 0,
     fileType: String? = null,
     dry: Boolean = false,
@@ -21,8 +32,13 @@ fun BaseCommand.expect(
     "Cannot expect both a stdout and a file changelog"
     )
 
-    val result = this.test(argv = argv, envvars = mapOf(MUSIC_MAN_DIR to testDir.toString()))
-    assertEquals(testDir.toString(), this.baseDir)
+    val result = this.test(
+        argv = argv,
+        envvars = if(testDir != null) mapOf(MUSIC_MAN_DIR to testDir.toString()) else emptyMap()
+    )
+    if(testDir != null) {
+        assertEquals(testDir.toString(), this.baseDir)
+    }
     assertEquals(statusCode, result.statusCode)
 
     if(fileType == null)

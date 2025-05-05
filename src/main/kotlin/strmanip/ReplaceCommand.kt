@@ -10,8 +10,6 @@ import com.github.ajalt.clikt.parameters.options.option
 import com.github.tacticallaptopbag.*
 
 class ReplaceCommand : BaseCommand("replace") {
-    override fun help(context: Context): String = HELP_REPL
-
     private val phrase by argument()
         .help(HELP_REPL_PHRASE)
     private val newPhrase by argument()
@@ -20,6 +18,8 @@ class ReplaceCommand : BaseCommand("replace") {
     private val regexFlag by option("-r", "--regex")
         .help(HELP_REPL_REGEX)
         .flag()
+
+    override fun help(context: Context): String = HELP_REPL
 
     private fun getNewName(fileName: String): String {
         if(regexFlag) {

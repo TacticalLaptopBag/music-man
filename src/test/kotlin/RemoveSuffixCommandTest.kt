@@ -1,3 +1,5 @@
+import com.github.tacticallaptopbag.HELP_REPL
+import com.github.tacticallaptopbag.HELP_RM_SUFFIX
 import com.github.tacticallaptopbag.strmanip.remove.RemoveSuffixCommand
 import org.junit.jupiter.api.io.TempDir
 import java.nio.file.Path
@@ -92,5 +94,10 @@ class RemoveSuffixCommandTest {
             testFileSuffix(3, "wav"),
             UNRELATED_FILE,
         )
+    }
+
+    @Test
+    fun testHelp() {
+        command.expectHelp(HELP_RM_SUFFIX)
     }
 }

@@ -1,4 +1,5 @@
 import com.github.tacticallaptopbag.FILETYPE_FAIL
+import com.github.tacticallaptopbag.HELP_REPL
 import com.github.tacticallaptopbag.strmanip.ReplaceCommand
 import org.junit.jupiter.api.io.TempDir
 import java.nio.file.Path
@@ -134,5 +135,10 @@ class ReplaceCommandTest {
             testFile(3, "txt"),
             unrelatedFile("txt"),
         )
+    }
+
+    @Test
+    fun testHelp() {
+        command.expectHelp(HELP_REPL)
     }
 }
