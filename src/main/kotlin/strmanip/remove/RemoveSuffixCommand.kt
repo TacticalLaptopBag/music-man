@@ -9,7 +9,7 @@ class RemoveSuffixCommand: RemoveBaseCommand(name = "suffix") {
         .help(HELP_RM_SUFFIX)
 
     override fun getNewName(fileName: String): String? {
-        if(!fileName.startsWith(suffix)) return null
-        return fileName.removePrefix(suffix)
+        if(!fileName.endsWith(suffix)) return null
+        return fileName.removeSuffix(suffix)
     }
 }
