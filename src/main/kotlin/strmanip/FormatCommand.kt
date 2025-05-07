@@ -23,7 +23,11 @@ class FormatCommand : BaseCommand("format") {
         val fileType = guessFileType()
         notifyDry()
 
-        val cwd = File(baseDir).absoluteFile
+        val cwd = if(baseDir == ".") {
+            File(baseDir).absoluteFile.parentFile
+        } else {
+            File(baseDir).absoluteFile
+        }
         val album = albumOpt ?: cwd.name
         val artist = artistOpt ?: cwd.parentFile.name
 
